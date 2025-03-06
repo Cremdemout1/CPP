@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   randomChump.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 14:53:18 by yohan             #+#    #+#             */
+/*   Updated: 2025/02/05 15:05:41 by yohan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-void randomChump(std::string name)
+void    randomChump(std::string name)
 {
     Zombie zombie(name);
     zombie.announce();

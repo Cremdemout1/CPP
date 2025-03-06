@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 14:34:19 by yohan             #+#    #+#             */
+/*   Updated: 2025/02/05 15:05:28 by yohan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef ZOMBIE_H
 #define ZOMBIE_H
@@ -8,17 +19,14 @@ class Zombie
 {
     private:
     std::string name;
-
+    
     public:
-    Zombie(std::string n);
-    void    announce(void);
-    ~Zombie()
-    {
-        std::cout << "destroying " + name + " from Heap" << std::endl;
-    }
+    Zombie(std::string name);
+    void    announce();
+    ~Zombie();
 };
 
-void randomChump(std::string name);
-Zombie *newZombie(std::string name);
+Zombie  *newZombie(std::string name);
+void    randomChump( std::string name);
 
 #endif

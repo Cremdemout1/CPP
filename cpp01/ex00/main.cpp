@@ -1,15 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/05 15:05:51 by yohan             #+#    #+#             */
+/*   Updated: 2025/02/05 15:13:45 by yohan            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-int main()
+void    example(Zombie &zombie)
 {
-    std::string name;
-    std::cout << "choose zombie name";
-    std::cin >> name;
-    
-    Zombie *allocated = newZombie(name + "(heap)");
-    allocated->announce();
-    randomChump(name + "(stack)");
-    delete(allocated);
-    return (0);
+    zombie.announce();
+    delete(&zombie);
+}
+
+int main(void)
+{
+    randomChump("Stack Memory (random chump)");
+    Zombie *exampleZombie = newZombie("Heap memory");
+    example(*exampleZombie);
+    Zombie zombie("Stack memory");
+    zombie.announce();
 }
