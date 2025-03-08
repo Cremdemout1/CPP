@@ -6,7 +6,7 @@
 /*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 13:08:08 by yohan             #+#    #+#             */
-/*   Updated: 2025/03/03 23:09:51 by yohan            ###   ########.fr       */
+/*   Updated: 2025/03/06 22:47:38 by yohan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ class RPN
     private:
             std::stack<float> operation;
             long long         result;
-            float             calculate(char operator);
-            void              runRPN(const std::string &str, std::string &delimiter);
+            void             calculate(const char op);
+            void             runRPN(const std::string &str);
+            void             parseInput(const std::string &input);
     public:
-            RPN(std::string &input);
+            RPN(const std::string &input);
             RPN(const RPN &copy);
             RPN &operator=(const RPN &other);
             ~RPN();
-}
+};

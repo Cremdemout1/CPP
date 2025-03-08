@@ -6,15 +6,15 @@
 #    By: yohan <yohan@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 13:58:50 by yohan             #+#    #+#              #
-#    Updated: 2025/03/06 23:07:52 by yohan            ###   ########.fr        #
+#    Updated: 2025/03/08 13:40:54 by yohan            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = RPN
+NAME = PmergeMe
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = g++
 
-SRC = main.cpp source/RPN.cpp
+SRC = main.cpp source/deque.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

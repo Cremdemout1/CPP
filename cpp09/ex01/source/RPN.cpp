@@ -6,60 +6,85 @@
 /*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 13:53:51 by yohan             #+#    #+#             */
-/*   Updated: 2025/03/03 23:19:59 by yohan            ###   ########.fr       */
+/*   Updated: 2025/03/07 11:07:07 by yohan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RPN.hpp"
 
-float    RPN::calculate(const char operator)
+void    RPN::calculate(const char op)
 {
+    float res = 0;
     float b = operation.top();
     operation.pop();
     float a = operation.top();
     operation.pop();
-    switch (operator)
+    switch (op)
     {
         case '*':
-            return (a * b);
+            res = (a * b);
+            break ;
         case '/':
-            return (a / b);
+            res = (a / b);
+            break ;
         case '+':
-            return (a + b);
+            res = (a + b);
+            break ;
         case '-':
-            return (a - b);
-        break;
-    
-    default:
-        break;
+            res = (a - b);
+            break ;
+        default:
+            throw std::runtime_error("Error: Unknown operator");
     }
-    return (result);
+    operation.push(res);
 }
 
-void    RPN::runRPN(const std::string &str, std::string &delimiter)
+void    RPN::runRPN(const std::string &str)
 {
-    std::stack<std::string> stack;
     std::stringstream ss(str);
     std::string token;
     float temp;
-    
-    while (std::getline(ss, token, delimiter[0]))
+     
+    while (std::getline(ss, token, ' '))
     {
-        if (token[0] == 'x' || token[0] == '/' || token[0] == '+' || token[0] == '-')
+        if (token[0] == '*' || token[0] == '/' || token[0] == '+' || (token[0] == '-' && !token[1]))
             calculate(token[0]);
-        temp = stof(token);
-        if (temp >= 10 || temp <= -10)
-            throw std::runtime_error("Invalid argument");
-        stack.push(stof(temp));
+        else
+        {
+            temp = std::atof(token.c_str());
+            if (temp >= 10 || temp <= -10)
+                throw std::runtime_error("Invalid argument");
+            operation.push(temp);
+        }
+    }
+    std::cout << operation.top();
+}
+
+void    RPN::parseInput(const std::string &input)
+{
+    std::string operators = "+-*/\n ";
+    std::string num = "0123456789";
+    for (size_t i = 0; i < input.length(); i++)
+    {
+        if (input[i] == '-'  && i + 1 < input.length()  && num.find(input[i + 1]) != std::string::npos)
+            continue ;
+        else if (input[i] == '+' || input[i] == '/' || input[i] == '*')
+        {
+            if (i + 1 < input.length() && input[i + 1] != ' ' && input[i + 1] != '\n' && input [i + 1] != '\0')
+                throw std::runtime_error("Invalid Input"); 
+        }
+        else if (operators.find(input[i]) == std::string::npos
+            && num.find(input[i]) == std::string::npos)
+            throw std::runtime_error("Invalid Input");
     }
 }
 
-RPN::RPN(std::string &input)
+RPN::RPN(const std::string &input)
 {
     try
     {
         parseInput(input);
-        
+        runRPN(input);
     }
     catch(const std::exception& e)
     {
@@ -79,14 +104,7 @@ RPN &RPN::operator=(const RPN &other)
         this->result = other.result;
         this->operation = other.operation;
     }
+    return (*this);
 }
-RPN::~RPN();
 
-
-void    parseInput(std::string &input)
-{
-    std::string operators = "+-*/";
-    for (int i = 0; i < input.length(); i++)
-        if (!isnumber(input[i]) || !operators.find(input[i]))
-            throw std::runtime_error("Invalid Input");
-}
+RPN::~RPN(){}
