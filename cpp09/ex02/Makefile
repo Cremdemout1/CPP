@@ -11,10 +11,10 @@
 # **************************************************************************** #
 
 NAME = PmergeMe
-FLAGS = -Wall -Wextra -Werror -std=c++98
+FLAGS = -Wall -Wextra -Werror -std=c++98 -std=c++11
 CC = g++
 
-SRC = main.cpp source/deque.cpp
+SRC = main.cpp source/deque.cpp source/list.cpp
 OBJ = $(SRC:.cpp=.o)
 
 all: $(NAME)

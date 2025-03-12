@@ -10,15 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/deque.hpp"
+#include "../includes/PmergeMe.hpp"
 
-PmergeMe::PmergeMe(const std::string &input) : array(), unsorted(), rest(), sequence(), pairSize(1)
+PmergeMe::PmergeMe(const std::string &input) : array(), unsorted(), rest(), sequence(), larray(), lunsorted(), lrest(), lsequence(), pairSize(1), lpairSize(1), runTime(0), lrunTime(0)
 {
     try
     {
         if (parse(input))
             return ;
+        chronometer.start();
         fordJohnsonSort();
+        runTime = chronometer.elapsed();
+        if (lparse(input))
+        return ;
+        chronometer.start();
+        lfordJohnsonSort();
+        lrunTime = chronometer.elapsed();
     }
     catch(const std::exception& e)
     {
@@ -39,6 +46,9 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
         this->rest = other.rest;
         this->sequence = other.sequence;
         this->pairSize = other.pairSize;
+        this->larray = other.larray;
+        this->lrest = other.lrest;
+        this->lsequence = other.lsequence;
     }
     return (*this);
 }
@@ -224,4 +234,9 @@ void    PmergeMe::getUnsorted()
         for (i = it->begin(); i != it->end(); ++i)
             std::cout << *i << " ";
     std::cout << std::endl;
+}
+
+void    PmergeMe::getRunTime()
+{
+    std::cout << std::fixed << "Sorting deque runTime: " << runTime << "s\n";
 }

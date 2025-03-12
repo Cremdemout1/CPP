@@ -10,14 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/deque.hpp"
+#include "./includes/PmergeMe.hpp"
 
 int main(int argc, char *argv[])
 {
     if (argc != 2)
         return 1;
-    PmergeMe instance(argv[1]);
-    instance.getUnsorted();
-    instance.getSequence();
+    try
+    {
+        PmergeMe instance(argv[1]);
+        instance.getUnsorted();
+        instance.getSequence();
+        instance.getRunTime();
+        instance.lgetRunTime();
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
     return 0;
 }

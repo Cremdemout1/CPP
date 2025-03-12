@@ -15,7 +15,9 @@
 #include <algorithm>
 #include <sstream>
 #include <deque>
+#include <list>
 #include <type_traits>
+#include "Chrono.hpp"
 
 class PmergeMe
 {
@@ -24,7 +26,17 @@ class PmergeMe
             std::deque<std::deque<int> >     unsorted;
             std::deque<int>                  rest;
             std::deque<int>                  sequence;
+
+            std::list<std::list<int> >       larray;
+            std::list<std::list<int> >       lunsorted;
+            std::list<int>                   lrest;
+            std::list<int>                   lsequence;
+
             size_t                           pairSize;
+            size_t                           lpairSize;
+            Chronometer                      chronometer;
+            double                           runTime;
+            double                           lrunTime;
             
             int     parse(const std::string &input);
             void    fordJohnsonSort();
@@ -36,6 +48,17 @@ class PmergeMe
             void    swapPairs(std::deque<int> &first, std::deque<int> &second);
             void    printArray();
             void    addToSequence(std::deque<int> &queue);
+
+            int     lparse(const std::string &input);
+            void    lfordJohnsonSort();
+            void    lpairUp();
+            void    linsert();
+            void    lbinaryInsert(int num);
+            void    linitSequence();
+            void    lstoreRest(std::list<std::list<int> >::iterator &end);
+            void    lswapPairs(std::list<int> &first, std::list<int> &second);
+            void    lprintArray();
+            void    laddToSequence(std::list<int> &queue);
     public:
             PmergeMe(const std::string &input);
             PmergeMe(const PmergeMe &copy);
@@ -43,4 +66,9 @@ class PmergeMe
             ~PmergeMe(){};
             void    getSequence();
             void    getUnsorted();
+            void    getRunTime();
+
+            void    lgetSequence();
+            void    lgetUnsorted();
+            void    lgetRunTime();
 };
