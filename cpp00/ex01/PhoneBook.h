@@ -6,7 +6,7 @@
 /*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:54:27 by yohan             #+#    #+#             */
-/*   Updated: 2025/02/01 19:25:21 by yohan            ###   ########.fr       */
+/*   Updated: 2025/04/27 11:36:38 by yohan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 #define PHONEBOOK_H
 
 #include <iostream>
+#include <csignal>
 const int MaxContactNum = 8;
+
+void handle_sigint(int sig)
+{
+    (void)sig;
+}
 
 class Contact
 {

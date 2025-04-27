@@ -6,7 +6,7 @@
 /*   By: yohan <yohan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/01 12:43:17 by yohan             #+#    #+#             */
-/*   Updated: 2025/02/05 13:55:35 by yohan            ###   ########.fr       */
+/*   Updated: 2025/04/27 12:13:57 by yohan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void    PhoneBook::setStuckIndex(bool value)
 void    PhoneBook::Add()
 {
     std::cout << index << std::endl;
+    if (std::cin.eof())
+    {
+        std::cin.clear(); 
+        return; 
+    }
     if (index < 8)
     {
         contacts[index].AddContact();
@@ -87,12 +92,25 @@ void    PhoneBook::Search()
     // prompt for index:
     std::string prompt;
     std::cout << "Enter index: ";
+
+    if (std::cin.eof())
+    {
+        std::cin.clear(); 
+        return; 
+    }
     std::cin >> prompt;
     while (prompt.length() > 1 || prompt[0] < '0' || prompt[0] > idx - 1 + '0')
     {
         std::cout <<"Invalid index. Please choose between 0 and " << idx - 1 << std::endl;
         std::cout << "Enter index:";
+        if (std::cin.eof())
+        {
+            std::cin.clear();
+            return;
+        }
         std::cin >> prompt;
+        if (std::cin.eof())
+            std::cin.clear();
     }
     int chosenIndex = atoi(prompt.c_str());
     std::cout << "First Name: " << contacts[chosenIndex].getFirstName() << std::endl;
